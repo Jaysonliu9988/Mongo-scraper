@@ -1,0 +1,53 @@
+<nav class="navbar navbar-inverse bg-primary">
+    <div class="container-fluid"></div>
+        <div class="navbar-header">
+            <a class="navbar-brand text-light" href="">Mongo Scraper</a>
+        </div>
+        <ul class="nav top-buttons">
+            <li><button class="btn btn-warning scrape">Scrape Articles!</button></li>
+            <li><a href="/saved"><button class="btn btn-warning saved">Saved Articles</button></a></li>
+        </ul>
+    </div>
+</nav>
+<div class="jumbotron text-center background-image text-light">
+    <div class="overlay">
+    </div>
+    {{!-- <div class="background-image">
+    </div> --}}
+    <div id="caption">
+        <h1>Mongo Scraper</h1>
+        <p>New York Times Edition</p>
+    </div>
+</div>
+<div class="container-fluid article-container">
+        {{#unless saved}}
+        {{#each articles}}
+        <div class="card w-90">
+            <div class="card-header text-white bg-primary">           <a  href={{this.url}} target="_blank">
+                    <h4 class="text-light">{{this.headline}}</h4>
+                </a>
+            </div> 
+
+            <div class="card-body">
+                <p class="card-text">{{this.summary}}</p>
+
+            </div>       
+                
+
+                    </br>
+                    <div class="button-div m-1">
+                        <button type= "button" class="btn btn-info save-button" data-id={{this.id}}>Save Article</button>
+                    
+                        <button type= "button" class="btn btn-danger delete-button " data-id={{this.id}}>Delete Article</button>
+                    </div>
+            
+        </div>    
+        {{/each}}
+        {{/unless}}
+</div>
+
+<footer class="footer">
+    <div class="container text-center">
+        <p>New York Times Mongo Scraper</p>
+    </div>
+</footer>

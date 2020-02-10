@@ -1,0 +1,73 @@
+<nav class="navbar navbar-inverse bg-primary">
+    <div class="container-fluid"></div>
+        <div class="navbar-header">
+            <a class="navbar-brand text-light" href="/">Home</a>
+        </div>
+        <ul class="nav top-buttons">
+            
+            
+        </ul>
+    </div>
+</nav>
+<div class="jumbotron text-center background-image text-light">
+    <div class="overlay">
+    </div>
+    <div class="background-image">
+    </div>
+    <div id="caption">
+        <h1>Saved Articles</h1>
+        <p>New York Times Edition</p>
+    </div>
+</div>
+<div class="container-fluid article-container">
+    {{#each articles}}
+        {{#if saved}}
+                <div class="card w-90">
+            <div class="card-header text-white bg-primary">           <a  href={{this.url}} target="_blank">
+                    <h4 class="text-light">{{this.headline}}</h4>
+                </a>
+            </div> 
+
+            <div class="card-body">
+                <p class="card-text">{{this.summary}}</p>
+
+            </div>       
+                
+
+                    </br>
+                    <div class="button-div m-1">
+                        <button type= "button" class="btn btn-primary note-button" data-id={{this.id}}>Add Note</button>
+                    
+                        <button type= "button" class="btn btn-danger delete-button" data-id={{this.id}}>Delete Article</button>
+                    </div>
+            
+        </div> 
+
+         {{/if}}
+    {{/each}}
+</div>
+        <div class="modal fade animated rollIn" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title"></div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info save-note-button" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+       
+
+<footer class="footer mt-4">
+    <div class="container text-center mt-4">
+        <p>New York Times Mongo Scraper</p>
+    </div>
+</footer>
