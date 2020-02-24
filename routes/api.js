@@ -137,9 +137,16 @@ module.exports = function(app) {
   });
 
   app.post("/:id", function(req, res) {
+    console.log('posting....')
     db.Note.create(req.body)
       .then(function(dbNote) {
-        return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+            console.log(dbNote);
+            // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
+            // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
+            // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+
+        // error is happening ehere
+        return db.Article.findOneAndUpdate({ _id: dbNote._id},{$push: { note: dbNote._id }}, { new: true });
       })
       .then(function(dbArticle) {
         res.json(dbArticle);
@@ -148,4 +155,11 @@ module.exports = function(app) {
         res.json(err);
       });
   });
+
+  app.get("/note/:id", (req, res) => {
+    db.Note.find({articleId: req.params.id}).then(data => {
+      console.log("Found " + data.length + " notes!")
+      res.json(data)
+    })
+  })
 }
